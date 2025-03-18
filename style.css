@@ -1,0 +1,95 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: grid;
+    place-items: center;
+    height: 100dvh;
+    margin: 0;
+}
+
+#torneio {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1fr;
+    height: 90dvh;
+    width: 75dvw;
+
+}
+
+.column.right figure {
+   
+    flex-direction: row-reverse;
+}
+
+.column {
+    height: 100%; 
+}
+
+
+
+.column .round1 {
+    background-color: blueviolet;
+}
+
+.column .round2 {
+    background-color: orangered;
+
+}
+
+.column .round4 {
+    background-color: red;
+}
+
+.column .round5 {
+    background-color: green;
+
+}
+
+.column .round3 {
+    background-color: blue;
+}
+
+.column figure {
+    max-height: 128px;
+    height: 90%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+@keyframes tremor-complexo {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    25% {
+        transform: translate(-5px, -5px) rotate(-5deg);
+    }
+
+    50% {
+        transform: translate(5px, 5px) rotate(5deg);
+    }
+
+    75% {
+        transform: translate(-5px, 5px) rotate(-5deg);
+    }
+
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+}
+
+/* Aplica a animação */
+.hover {
+    animation: tremor-complexo 0.5s infinite;
+}
+
+.column figure img {
+    background: rgba(0, 0, 0, 0) no-repeat;
+    background-image: url("./img/kon.png"), url("./img/bg.png");
+    background-size: cover;
+    height: 100%;
+}
