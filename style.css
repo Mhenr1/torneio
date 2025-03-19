@@ -7,8 +7,12 @@
 body {
     display: grid;
     place-items: center;
-    height: 100dvh;
+    height: 100vh;
     margin: 0;
+    background: url("./img/ichigoVsGrimm.jpeg") no-repeat;
+    background-position: center;
+    background-size: cover;
+
 }
 
 #torneio {
@@ -19,45 +23,74 @@ body {
 
 }
 
+.center {
+    background: url('./img/vs.png') no-repeat;
+    background-size: 90%;
+    background-position: center;
+}
+
 .column.right figure {
-   
+
     flex-direction: row-reverse;
 }
 
-.column {
-    height: 100%; 
+.column .guild {
+    height: 10%;
+    backdrop-filter: none;
+    font-size: 32px;
+    color: rgba(0, 0, 0, 1);
+    text-shadow: 2px 2px 5px rgb(255, 0, 0), -2px -2px 5px rgb(47, 0, 255);
+    text-align: center;
 }
 
+.column {
+    height: inherit;
+}
+
+.column div {
+    height: 17%;
+    margin: 2px;
+    backdrop-filter: blur(15px)
+}
 
 
 .column .round1 {
-    background-color: blueviolet;
+    background-color: rgba(138, 43, 226, .5);
+    border: 4px solid rgba(138, 43, 226, .5);
 }
 
 .column .round2 {
-    background-color: orangered;
+    background-color: rgba(255, 69, 0, .3);
+    border: 4px solid rgba(255, 69, 0, .3);
 
 }
 
 .column .round4 {
-    background-color: red;
+    background-color: rgba(255, 0, 0, .3);
+    border: 4px solid rgba(255, 0, 0, .3);
+
 }
 
 .column .round5 {
-    background-color: green;
+    background-color: rgba(0, 128, 0, .3);
+    border: 4px solid rgba(0, 128, 0, .3);
+
 
 }
 
 .column .round3 {
-    background-color: blue;
+    background-color: rgba(0, 0, 255, 0.3);
+    border: 4px solid rgba(0, 0, 255, 0.3);
+
 }
 
 .column figure {
     max-height: 128px;
-    height: 90%;
+    height: 100%;
     display: flex;
     align-items: center;
     gap: 10px;
+    padding: 10px;
 }
 
 @keyframes tremor-complexo {
