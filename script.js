@@ -42,7 +42,7 @@ function handleDrop(e) {
   target = e.target.closest("div");
   ancestor = target.closest(".column");
   if (!ancestor) {
-    return  
+    return
   }
 
   const files = e.dataTransfer.files; // Pega os arquivos soltos
@@ -52,11 +52,47 @@ function handleDrop(e) {
       const reader = new FileReader(); // Cria um leitor de arquivos
       reader.onload = function (event) {
         target.querySelector("figure img").style.backgroundImage = "url(" + event.target.result + " ), url('./img/bg.png')"
+        store = [];
+        document.querySelectorAll(".column").forEach((column) => {
 
-      };
+          store.push(column.innerHTML);
+
+        });
+        localStorage.setItem("data", JSON.stringify(store));
+      }
       reader.readAsDataURL(file)
     } else {
       alert('Por favor, solte apenas arquivos de imagem.');
     }
   }
 }
+
+
+
+(() => {
+  data = JSON.parse(localStorage.getItem("data"));
+  if (data) {
+    data.forEach((column, index) => {
+      document.querySelectorAll(".column")[index].innerHTML = column;
+    });
+  }
+  document.querySelectorAll("p ,figcaption").forEach(e => {
+    console.log(e)
+
+    e.addEventListener('click', function () {
+    
+      e.contentEditable = true;
+      e.focus();
+      e.addEventListener('blur', function () {
+        e.contentEditable = false;
+        store = [];
+        document.querySelectorAll(".column").forEach((column) => {
+          store.push(column.innerHTML);
+        });
+        localStorage.setItem("data", JSON.stringify(store));
+      });
+    });
+
+
+  });
+})();
