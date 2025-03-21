@@ -12,14 +12,12 @@ body {
     background: url("./img/ichigoVsGrimm.jpeg") no-repeat;
     background-position: center;
     background-size: cover;
-    outline: red solid 2px;
+    outline: white solid 2px;
     outline-offset: -10px;
 
 }
 
-body.editavel {
-    outline: red dotted 2px;
-}
+
 
 #torneio {
     display: grid;
@@ -58,13 +56,23 @@ body.editavel {
     font-size: 32px;
     color: white;
     text-shadow: 2px 2px 5px rgb(255, 0, 0),
-    -2px -2px 5px rgb(47, 0, 255);
+        -2px -2px 5px rgb(47, 0, 255);
+}
+
+.loser {
+    filter: grayscale(75%);
+}
+
+.winner {
+    filter: none;
 }
 
 .column div {
     height: 17%;
     margin: 2px;
-    backdrop-filter: blur(15px)
+    backdrop-filter: blur(15px);
+    transition: filter 2s ease;
+
 }
 
 

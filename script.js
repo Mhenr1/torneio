@@ -52,13 +52,8 @@ function handleDrop(e) {
       const reader = new FileReader(); // Cria um leitor de arquivos
       reader.onload = function (event) {
         target.querySelector("figure img").style.backgroundImage = "url(" + event.target.result + " ), url('./img/bg.png')"
-        store = [];
-        document.querySelectorAll(".column").forEach((column) => {
 
-          store.push(column.innerHTML);
-
-        });
-        localStorage.setItem("data", JSON.stringify(store));
+        saveData();
       }
       reader.readAsDataURL(file)
     } else {
@@ -68,7 +63,13 @@ function handleDrop(e) {
 }
 
 
-
+function saveData() {
+  store = [];
+  document.querySelectorAll(".column").forEach((column) => {
+    store.push(column.innerHTML);
+  });
+  localStorage.setItem("data", JSON.stringify(store));
+}
 (() => {
   data = JSON.parse(localStorage.getItem("data"));
   if (data) {
@@ -77,22 +78,52 @@ function handleDrop(e) {
     });
   }
   document.querySelectorAll("p ,figcaption").forEach(e => {
-    console.log(e)
 
-    e.addEventListener('click', function () {
-    
+    e.addEventListener('click', function (event) {
+      if (!event.ctrlKey) return
+
       e.contentEditable = true;
       e.focus();
       e.addEventListener('blur', function () {
+
         e.contentEditable = false;
-        store = [];
-        document.querySelectorAll(".column").forEach((column) => {
-          store.push(column.innerHTML);
-        });
-        localStorage.setItem("data", JSON.stringify(store));
+        if (e.tagName == "P") {
+          e.dataset.text = e.innerHTML;
+        }
+        saveData();
       });
     });
 
 
+  });
+  let round = document.querySelectorAll(".column div");
+  Array.from(round).map((round) => {
+
+    className = round.className;
+    if (className.startsWith("round")) {
+      round.addEventListener('click', function (event) {
+        if (event.ctrlKey) return;
+        roundNumber = round.classList[0];
+        roundSelected = document.querySelectorAll(`.${roundNumber}`);
+        if (round.classList.contains("winner")) {
+
+
+          roundSelected.forEach(e => {
+            e.classList.remove("winner");
+            e.classList.remove("loser");
+          })
+          saveData();
+          return;
+        }
+
+        roundSelected.forEach(e => {
+          e.classList.remove("winner");
+          e.classList.add("loser");
+        })
+        round.classList.add("winner");
+        round.classList.remove("loser");
+        saveData();
+      });
+    }
   });
 })();
