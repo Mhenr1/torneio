@@ -70,6 +70,35 @@ function saveData() {
   });
   localStorage.setItem("data", JSON.stringify(store));
 }
+function counter() {
+  points = {
+    left: 0,
+    right: 0,
+    total:0
+  }
+  document.querySelectorAll(".column")
+
+    .forEach((column) => {
+      side = column.classList[1]
+      points[side] = column.querySelectorAll(".winner").length
+      points.total = points.left + points.right;
+      column.querySelector(".guild p").style.setProperty("--points", `" (${points[side]})"`)
+    })
+    localStorage.setItem("points", JSON.stringify(points));
+    saveData();
+}
+function winner(){
+
+  points = JSON.parse(localStorage.getItem("points"));
+  if(points.total == 5){
+
+    if(points.left > points.right){
+      alert("Left side wins")
+    }else{
+      alert("Right side wins")
+    }
+  }
+}
 (() => {
   data = JSON.parse(localStorage.getItem("data"));
   if (data) {
@@ -125,5 +154,16 @@ function saveData() {
         saveData();
       });
     }
+  });
+
+  let side = document.querySelectorAll(".column");
+  Array.from(side).map((side) => {
+    side.addEventListener('click', function (event) {
+      if (event.ctrlKey) return;
+
+      counter();
+
+
+    });
   });
 })();
