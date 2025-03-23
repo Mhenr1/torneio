@@ -52,8 +52,9 @@ body {
 
 }
 
-.guild p::after {
-    content: var(--points, "texto");
+.right .guild p::before,
+.left .guild p::after {
+    content: var(--points, "");
     font-size: 20px;
     text-shadow: none;
     font-family: 'Times New Roman', Times, serif;

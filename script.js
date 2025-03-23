@@ -74,7 +74,7 @@ function counter() {
   points = {
     left: 0,
     right: 0,
-    total:0
+    total: 0
   }
   document.querySelectorAll(".column")
 
@@ -82,19 +82,19 @@ function counter() {
       side = column.classList[1]
       points[side] = column.querySelectorAll(".winner").length
       points.total = points.left + points.right;
-      column.querySelector(".guild p").style.setProperty("--points", `" (${points[side]})"`)
+      column.querySelector(".guild p").style.setProperty("--points", `" (${points[side]}) "`)
     })
-    localStorage.setItem("points", JSON.stringify(points));
-    saveData();
+  localStorage.setItem("points", JSON.stringify(points));
+  saveData();
 }
-function winner(){
+function winner() {
 
   points = JSON.parse(localStorage.getItem("points"));
-  if(points.total == 5){
+  if (points.total == 5) {
 
-    if(points.left > points.right){
+    if (points.left > points.right) {
       alert("Left side wins")
-    }else{
+    } else {
       alert("Right side wins")
     }
   }
@@ -167,3 +167,10 @@ function winner(){
     });
   });
 })();
+document.addEventListener('keydown', function (event) {
+
+  if (event.key == "Delete" && event.ctrlKey) {
+    selection = confirm("Deseja apagar os dados do Torneio?") ? localStorage.clear() : null;
+    location.reload()
+  };
+});
