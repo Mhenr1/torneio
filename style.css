@@ -80,6 +80,7 @@ body {
     width: 100%;
     white-space: nowrap;
     line-height: 0;
+    font-size: 50px;
 }
 
 .right .guild p::before,

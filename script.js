@@ -221,7 +221,7 @@ function winner() {
 document.addEventListener('keydown', function (event) {
 
   if (event.key == "Delete" && event.ctrlKey) {
-    selection = confirm("Deseja apagar os dados do Torneio?") ? localStorage.clear() : null;
+    confirm("Deseja apagar os dados do Torneio?") ? localStorage.clear() : null;
     location.reload()
   };
 });
