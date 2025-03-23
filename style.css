@@ -14,14 +14,13 @@ body {
     background-size: cover;
     outline: white solid 2px;
     outline-offset: -10px;
-
 }
 
 
 
 #torneio {
     display: grid;
-    grid-template-columns: 1fr 1.5fr 1fr;
+    grid-template-columns: 20vw 1fr 20vw;
     height: 90dvh;
     width: 75dvw;
 
@@ -42,16 +41,18 @@ body {
 
 .column .guild {
     height: 10%;
-    backdrop-filter: none;
-    font-size: 50px;
+    backdrop-filter: none;   
     color: rgba(0, 0, 0, 1);
     text-shadow: 2px 2px 5px rgb(255, 0, 0),
         -2px -2px 5px rgb(47, 0, 255);
     -webkit-text-stroke: .2px rgb(255, 255, 255);
     text-align: center;
-
 }
-
+.guild p{
+    display: inline-block;
+    width: 100%;
+    white-space: nowrap;
+}
 .right .guild p::before,
 .left .guild p::after {
     content: var(--points, "");
@@ -62,7 +63,7 @@ body {
         -1px -1px 2px rgb(255, 255, 255);
     -webkit-text-stroke: .2px rgb(255, 255, 255);
     -webkit-text-stroke: initial;
-    margin-top:-2px;
+    margin-top: -2px;
     vertical-align: super;
 }
 

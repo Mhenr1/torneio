@@ -85,6 +85,7 @@ function counter() {
       column.querySelector(".guild p").style.setProperty("--points", `" (${points[side]}) "`)
     })
   localStorage.setItem("points", JSON.stringify(points));
+  winner();
   saveData();
 }
 function winner() {
@@ -93,10 +94,12 @@ function winner() {
   if (points.total == 5) {
 
     if (points.left > points.right) {
-      alert("Left side wins")
+     vencedor =  document.querySelector(".left .guild p").innerText
+
     } else {
-      alert("Right side wins")
+     vencedor =  document.querySelector(".right .guild p").innerText
     }
+   
   }
 }
 (() => {
@@ -108,17 +111,41 @@ function winner() {
   }
   document.querySelectorAll("p ,figcaption").forEach(e => {
 
+
     e.addEventListener('click', function (event) {
       if (!event.ctrlKey) return
+      textOriginal = e.innerText;
+      e.addEventListener('keydown', function (event) {
 
+        if (event.key == "Enter" || (event.key === 'Enter' && event.shiftKey)) {
+          event.preventDefault();
+          e.blur();
+        }
+      });
       e.contentEditable = true;
       e.focus();
-      e.addEventListener('blur', function () {
 
+      e.addEventListener('blur', function () {
+        if (e.innerText.trim() == "") {
+
+          e.innerText = textOriginal;
+        }
         e.contentEditable = false;
         if (e.tagName == "P") {
-          e.dataset.text = e.innerHTML;
+          const canvas = document.createElement('canvas');
+          const contexto = canvas.getContext('2d');
+          contexto.font = '50px "Times New Roman"';
+          contextoWidth = contexto.measureText(e.innerText).width;
+          width = e.offsetWidth;
+         if(contextoWidth > width){
+          fontSize = 50 * (width / contextoWidth);
+          fontSize = fontSize.toFixed(2);
+          e.style.fontSize = `${fontSize}px`;
+         }
+         canvas.remove();
         }
+
+
         saveData();
       });
     });
