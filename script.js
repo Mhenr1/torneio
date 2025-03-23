@@ -91,6 +91,15 @@ function counter() {
 function winner() {
 
   points = JSON.parse(localStorage.getItem("points"));
+  if (!points) {
+    points = {
+      left: 0,
+      right: 0,
+      total: 0
+    }
+    localStorage.setItem("points", JSON.stringify(points));
+
+  }
   columnCenter = document.querySelector('.center');
   columnCenter.classList.remove('final')
   if (points.total == 5) {
@@ -163,7 +172,7 @@ function winner() {
           if (contextoWidth > width) {
             fontSize = 50 * (width / contextoWidth);
             fontSize = fontSize.toFixed(2);
-           
+
           }
           e.style.fontSize = `${fontSize}px`;
           canvas.remove();
