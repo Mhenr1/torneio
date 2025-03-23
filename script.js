@@ -91,15 +91,36 @@ function counter() {
 function winner() {
 
   points = JSON.parse(localStorage.getItem("points"));
+  columnCenter = document.querySelector('.center');
+  columnCenter.classList.remove('final')
   if (points.total == 5) {
 
     if (points.left > points.right) {
-     vencedor =  document.querySelector(".left .guild p").innerText
+      vencedor = document.querySelector(".left .guild p").innerText
 
     } else {
-     vencedor =  document.querySelector(".right .guild p").innerText
+      vencedor = document.querySelector(".right .guild p").innerText
     }
-   
+    columnCenter.classList.add('final')
+    width = columnCenter.offsetWidth;
+
+    document.querySelector('.center p').innerText = vencedor;
+
+    const canvas = document.createElement('canvas');
+    const contexto = canvas.getContext('2d');
+    contexto.font = '75px "Times New Roman"';
+    contextoWidth = contexto.measureText(vencedor).width;
+
+    fontSize = 70;
+    if (contextoWidth > width) {
+
+      fontSize = 70 * (width / contextoWidth);
+      fontSize = fontSize.toFixed(2);
+
+    }
+    columnCenter.style.fontSize = `${fontSize}px`;
+    canvas.remove();
+
   }
 }
 (() => {
@@ -107,6 +128,7 @@ function winner() {
   if (data) {
     data.forEach((column, index) => {
       document.querySelectorAll(".column")[index].innerHTML = column;
+      winner();
     });
   }
   document.querySelectorAll("p ,figcaption").forEach(e => {
@@ -132,17 +154,19 @@ function winner() {
         }
         e.contentEditable = false;
         if (e.tagName == "P") {
+          width = e.offsetWidth;
           const canvas = document.createElement('canvas');
           const contexto = canvas.getContext('2d');
           contexto.font = '50px "Times New Roman"';
           contextoWidth = contexto.measureText(e.innerText).width;
-          width = e.offsetWidth;
-         if(contextoWidth > width){
-          fontSize = 50 * (width / contextoWidth);
-          fontSize = fontSize.toFixed(2);
+          fontSize = 50;
+          if (contextoWidth > width) {
+            fontSize = 50 * (width / contextoWidth);
+            fontSize = fontSize.toFixed(2);
+           
+          }
           e.style.fontSize = `${fontSize}px`;
-         }
-         canvas.remove();
+          canvas.remove();
         }
 
 
